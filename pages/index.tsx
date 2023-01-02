@@ -6,12 +6,24 @@ import {
   VideoCameraOutlined,
 } from "@ant-design/icons";
 import { Button, Col, Layout, Menu, Row, Space } from "antd";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Products from "../src/components/Products";
+import { invoke } from "@tauri-apps/api/tauri";
+import { tauri } from "@tauri-apps/api";
 const { Header, Sider, Content } = Layout;
 
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
+
+  invoke("init")
+    .then((message) => console.log(message))
+    .catch((error) => console.error(error));
+
+  // Products::setDataSource([
+  //   { id: 1, barcode: "123456", name: "Foo" },
+  //   { id: 2, barcode: "789012", name: "Bar" },
+  // ]);
+
   return (
     <Layout className="layout">
       <Sider trigger={null} collapsible collapsed={collapsed}>

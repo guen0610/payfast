@@ -1,39 +1,41 @@
-import React from 'react';
-import { Table } from 'antd';
+import React from "react";
+import { Table } from "antd";
 
 export default () => {
-    const dataSource = [
-        {
-            key: '1',
-            name: 'Mike',
-            age: 32,
-            address: '10 Downing Street',
-        },
-        {
-            key: '2',
-            name: 'John',
-            age: 42,
-            address: '10 Downing Street',
-        },
-        ];
+  const [dataSource, setDataSource] = React.useState([]);
 
-        const columns = [
-        {
-            title: 'Name',
-            dataIndex: 'name',
-            key: 'name',
-        },
-        {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
-        },
-        {
-            title: 'Address',
-            dataIndex: 'address',
-            key: 'address',
-        },
-    ];
+  const columns = [
+    {
+      title: "Id",
+      dataIndex: "id",
+      key: "id",
+    },
+    {
+      title: "Barcode",
+      dataIndex: "barcode",
+      key: "barcode",
+    },
+    {
+      title: "Category_id",
+      dataIndex: "category_id",
+      key: "category_id",
+    },
+    {
+      title: "Nhat",
+      dataIndex: "nhat",
+      key: "nhat",
+    },
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Unit",
+      dataIndex: "unit",
+      key: "unit",
+    },
+  ];
 
-    return <Table dataSource={dataSource} columns={columns} />;
-}
+  return <Table dataSource={dataSource} columns={columns} />;
+};
