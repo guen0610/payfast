@@ -14,15 +14,16 @@ const { Header, Sider, Content } = Layout;
 
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
+  const [data, setData] = React.useState<Array<{ [key: string]: any }>>([]);
 
+  React.useEffect(() => {
+  console.log("invoking init from js");
   invoke("init")
-    .then((message) => console.log(message))
+    .then((message) => {
+      setData(message);
+    })
     .catch((error) => console.error(error));
-
-  // Products::setDataSource([
-  //   { id: 1, barcode: "123456", name: "Foo" },
-  //   { id: 2, barcode: "789012", name: "Bar" },
-  // ]);
+  }, []);
 
   return (
     <Layout className="layout">
@@ -81,7 +82,7 @@ export default function Home() {
           </Row>
           <Row>
             <Col span={24}>
-              <Products />
+              <Products data={data}/>
             </Col>
           </Row>
         </Content>

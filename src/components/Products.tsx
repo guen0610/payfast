@@ -1,9 +1,11 @@
 import React from "react";
 import { Table } from "antd";
 
-export default () => {
-  const [dataSource, setDataSource] = React.useState([]);
+interface ProductProps {
+  data: any;
+}
 
+const Product: React.FC<ProductProps> = (props) => {
   const columns = [
     {
       title: "Id",
@@ -37,5 +39,7 @@ export default () => {
     },
   ];
 
-  return <Table dataSource={dataSource} columns={columns} />;
+  return <Table dataSource={props.data} columns={columns} />;
 };
+
+export default Product;
