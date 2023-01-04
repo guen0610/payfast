@@ -7,6 +7,7 @@ import {
 } from "@ant-design/icons";
 import { Button, Col, Layout, Menu, Row, Space } from "antd";
 import React, { useState, useEffect } from "react";
+import Main from "../src/components/Main";
 import Products from "../src/components/Products";
 import Search from "../src/components/Search";
 import { invoke } from "@tauri-apps/api/tauri";
@@ -16,24 +17,24 @@ const { Header, Sider, Content } = Layout;
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
   const [data, setData] = React.useState<Array<{ [key: string]: any }>>([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
     console.log(value);
-  }
+  };
 
   const handleSearchPressed = () => {
     console.log(inputValue);
-  }
+  };
 
   React.useEffect(() => {
-  console.log("invoking init from js");
-  invoke("init")
-    .then((message) => {
-      setData(message);
-    })
-    .catch((error) => console.error(error));
+    console.log("invoking init from js");
+    invoke("init")
+      .then((message) => {
+        setData(message);
+      })
+      .catch((error) => console.error(error));
   }, []);
 
   return (
@@ -86,18 +87,32 @@ export default function Home() {
           }}
         >
           <Row>
-            <Col span={12}>
-              {" "}
-              <Button type="primary">Primary Button</Button>
+            <Col span={16}>
+              <Row>
+                <Col span={12}>
+                  <Button type="primary">Primary Button</Button>
+                </Col>
+                <Col span={12}></Col>
+              </Row>
+              <Row>
+                <Col span={24}><Main data={data}/></Col>
+              </Row>
             </Col>
-            <Col span={12}>
-              {" "}
-              <Search inputValue={inputValue} onInputChange={handleInputChange} onSearchPressed={handleSearchPressed}/>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24}>
-              <Products data={data}/>
+            <Col span={8}>
+              <Row>
+                <Col span={24}>
+                  <Search
+                    inputValue={inputValue}
+                    onInputChange={handleInputChange}
+                    onSearchPressed={handleSearchPressed}
+                  />
+                </Col>
+              </Row>
+              <Row>
+                <Col span={24}>
+                  <Products data={data} />
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Content>

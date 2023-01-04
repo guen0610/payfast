@@ -1,30 +1,35 @@
 import React from "react";
 import { Table } from "antd";
 
-interface ProductProps {
+interface MainProps {
   data: any;
 }
 
-const Product: React.FC<ProductProps> = (props) => {
+const Main: React.FC<MainProps> = (props) => {
   const columns = [
-    {
-      title: "Barcode",
-      dataIndex: "barcode",
-      key: "barcode",
-    },
     {
       title: "Name",
       dataIndex: "name",
       key: "name",
     },
     {
-      title: "Price",
+      title: "Count",
+      dataIndex: "count",
+      key: "count",
+    },
+    {
+      title: "Unit Price",
       dataIndex: "price",
       key: "price",
+    },
+    {
+      title: "Total Price",
+      dataIndex: "total",
+      key: "total",
     }
   ];
 
   return <Table dataSource={props.data} columns={columns} />;
 };
 
-export default Product;
+export default Main;

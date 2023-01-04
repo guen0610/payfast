@@ -32,6 +32,7 @@ struct Item {
     nhat: i32,
     name: String,
     unit: i32,
+    price: i32
 }
 
 fn main() {
@@ -57,7 +58,7 @@ fn init() -> Result<Vec<Item>, Error> {
     };
 
     println!("Preparing conn");
-    let mut stmt = conn.prepare("SELECT id, barcode, category_id, nhat, name, unit FROM items")?;
+    let mut stmt = conn.prepare("SELECT id, barcode, category_id, nhat, name, unit, price FROM items")?;
 
     println!("Parsing to struct");
     let item_iter = stmt.query_map([], |row| {
@@ -68,6 +69,7 @@ fn init() -> Result<Vec<Item>, Error> {
             nhat: row.get(3)?,
             name: row.get(4)?,
             unit: row.get(5)?,
+            price: row.get(6)?,
         })
     })?;
 
