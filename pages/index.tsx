@@ -8,6 +8,7 @@ import {
 import { Button, Col, Layout, Menu, Row, Space } from "antd";
 import React, { useState, useEffect } from "react";
 import Products from "../src/components/Products";
+import Search from "../src/components/Search";
 import { invoke } from "@tauri-apps/api/tauri";
 import { tauri } from "@tauri-apps/api";
 const { Header, Sider, Content } = Layout;
@@ -15,6 +16,16 @@ const { Header, Sider, Content } = Layout;
 export default function Home() {
   const [collapsed, setCollapsed] = useState(false);
   const [data, setData] = React.useState<Array<{ [key: string]: any }>>([]);
+  const [inputValue, setInputValue] = useState('');
+
+  const handleInputChange = (value: string) => {
+    setInputValue(value);
+    console.log(value);
+  }
+
+  const handleSearchPressed = () => {
+    console.log(inputValue);
+  }
 
   React.useEffect(() => {
   console.log("invoking init from js");
@@ -75,9 +86,13 @@ export default function Home() {
           }}
         >
           <Row>
-            <Col span={24}>
+            <Col span={12}>
               {" "}
               <Button type="primary">Primary Button</Button>
+            </Col>
+            <Col span={12}>
+              {" "}
+              <Search inputValue={inputValue} onInputChange={handleInputChange} onSearchPressed={handleSearchPressed}/>
             </Col>
           </Row>
           <Row>
